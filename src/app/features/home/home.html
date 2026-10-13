@@ -1,0 +1,23 @@
+<section class="home">
+  <h1>{{ appName }}</h1>
+  <p>Track, filter and manage your team's tasks in one place.</p>
+
+  <div class="actions">
+    <app-button label="View tasks" (click)="router.navigate(['/tasks'])" />
+    @if (auth.isLoggedIn()) {
+      <app-button
+        label="Create a task"
+        variant="secondary"
+        [outlined]="true"
+        (click)="router.navigate(['/tasks/new'])"
+      />
+    } @else {
+      <app-button
+        label="Log in to create tasks"
+        variant="secondary"
+        [outlined]="true"
+        (click)="auth.login()"
+      />
+    }
+  </div>
+</section>

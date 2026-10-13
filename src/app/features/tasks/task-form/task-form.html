@@ -1,0 +1,40 @@
+<h1>{{ task() ? 'Edit task' : 'New task' }}</h1>
+
+<form class="panel" [formGroup]="form" (ngSubmit)="save()">
+  <div>
+    <app-input
+      label="Title"
+      placeholder="Enter a task title"
+      [control]="form.controls.title"
+      [required]="true"
+    />
+    @if (form.controls.title.hasError('buzzword')) {
+      <small class="error">"{{ form.controls.title.getError('buzzword') }}" is not allowed.</small>
+    }
+  </div>
+
+  <app-dropdown
+    label="User"
+    placeholder="Select a user"
+    [control]="form.controls.userId"
+    [options]="users()"
+    optionLabel="name"
+    optionValue="id"
+    [required]="true"
+  />
+
+  <div class="checkbox">
+    <p-checkbox inputId="completed" formControlName="completed" [binary]="true" />
+    <label for="completed">Completed</label>
+  </div>
+
+  <div class="actions">
+    <app-button
+      label="Cancel"
+      variant="secondary"
+      [outlined]="true"
+      (click)="router.navigate(['/tasks'])"
+    />
+    <app-button label="Save" type="submit" [loading]="saving()" />
+  </div>
+</form>

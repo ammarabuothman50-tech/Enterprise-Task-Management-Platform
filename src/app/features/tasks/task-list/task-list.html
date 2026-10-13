@@ -1,0 +1,83 @@
+<h1>Tasks</h1>
+
+<section class="toolbar">
+  <input pInputText type="search" placeholder="Search tasks..." [(ngModel)]="query" />
+
+  <p-multiselect
+    [options]="users()"
+    optionLabel="name"
+    optionValue="id"
+    placeholder="All users"
+    [(ngModel)]="selectedUserIds"
+  />
+
+  <div class="filters">
+    @for (option of filters; track option.value) {
+      <app-button
+        [label]="option.label"
+        [outlined]="filter() !== option.value"
+        (click)="filter.set(option.value)"
+      />
+    }
+  </div>
+</section>
+
+<section class="stats">
+  <span>{{ completedCount() }} of {{ totalCount() }} completed</span>
+  <div class="progress">
+    <div class="progress-bar" [ngStyle]="{ width: progress() + '%' }"></div>
+  </div>
+</section>
+
+@if (error()) {
+  <div class="message">
+    <p>Couldn't load tasks.</p>
+    <app-button label="Retry" (click)="load()" />
+  </div>
+} @else if (loaded()) {
+  @defer (on viewport) {
+    <app-task-analytics-chart [tasks]="tasks()" />
+  } @placeholder {
+    <p class="message">Loading chart...</p>
+  }
+
+  <div class="list">
+    @for (task of filteredTasks(); track task.id) {
+      <app-task-card
+        [task]="task"
+        (toggle)="toggleStatus($event)"
+        (remove)="taskToDelete.set($event)"
+      />
+    } @empty {
+      <p class="message">
+        @switch (filter()) {
+          @case ('completed') {
+            No completed tasks.
+          }
+          @case ('pending') {
+            No pending tasks.
+          }
+          @default {
+            No tasks found.
+          }
+        }
+      </p>
+    }
+  </div>
+}
+
+@if (taskToDelete(); as task) {
+  <app-modal (close)="taskToDelete.set(null)">
+    <span modal-header>Delete task</span>
+    <p modal-body>Delete "{{ task.title }}"?</p>
+    <ng-container modal-footer>
+      <app-button
+        label="Cancel"
+        variant="secondary"
+        [outlined]="true"
+        (click)="taskToDelete.set(null)"
+      />
+      <app-button label="Delete" variant="danger" (click)="deleteTask()" />
+    </ng-container>
+  </app-modal>
+}

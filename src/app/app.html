@@ -1,0 +1,31 @@
+<header class="navbar">
+  <a routerLink="/home" class="brand">{{ appName }}</a>
+
+  <nav class="links">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Tasks
+    </a>
+    @if (auth.isLoggedIn()) {
+      <a routerLink="/tasks/new" routerLinkActive="active">New task</a>
+    }
+  </nav>
+
+  <app-button
+    [label]="auth.isLoggedIn() ? 'Log out' : 'Log in'"
+    variant="secondary"
+    (click)="auth.toggle()"
+  />
+</header>
+
+<main class="container">
+  <router-outlet />
+</main>
+
+<div class="toasts">
+  <ng-container #toastHost />
+</div>
+
+@if (loading.isLoading()) {
+  <app-spinner />
+}

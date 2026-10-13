@@ -1,0 +1,11 @@
+<h2>Completed by user</h2>
+
+@for (row of rows(); track row.name) {
+  <div class="row">
+    <span class="name">{{ row.name }}</span>
+    <div class="bar">
+      <div class="fill" [style.width.%]="row.percent"></div>
+    </div>
+    <span class="count">{{ row.completed }}/{{ row.total }}</span>
+  </div>
+}

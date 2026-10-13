@@ -1,0 +1,18 @@
+<article class="card" [appHighlightPriority]="task().completed">
+  <div class="info">
+    <a [routerLink]="['/tasks', task().id]">{{ task().title }}</a>
+    <small>{{ task().user?.name ?? 'Unknown user' }}</small>
+  </div>
+
+  <span class="status" [ngClass]="{ done: task().completed }">
+    {{ task().completed | taskStatus }}
+  </span>
+
+  <app-button
+    [label]="task().completed ? 'Mark pending' : 'Mark done'"
+    variant="secondary"
+    [outlined]="true"
+    (click)="toggle.emit(task())"
+  />
+  <app-button label="Delete" variant="danger" [outlined]="true" (click)="remove.emit(task())" />
+</article>

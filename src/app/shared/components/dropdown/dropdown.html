@@ -1,0 +1,18 @@
+@if (label()) {
+  <label [for]="id">
+    {{ label() }}
+    @if (required()) {
+      <span class="required-mark">*</span>
+    }
+  </label>
+}
+<p-select
+  fluid
+  [inputId]="id"
+  [options]="options()"
+  [optionLabel]="optionLabel()"
+  [optionValue]="optionValue()"
+  [placeholder]="placeholder()"
+  [formControl]="control()"
+  [invalid]="showRequired()"
+/>

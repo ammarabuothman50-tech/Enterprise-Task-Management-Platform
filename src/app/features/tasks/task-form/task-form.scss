@@ -1,0 +1,28 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 500px;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.error {
+  display: block;
+  margin-top: 0.25rem;
+  color: #dc2626;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

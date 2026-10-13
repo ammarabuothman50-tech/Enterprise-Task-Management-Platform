@@ -1,0 +1,35 @@
+<div class="actions">
+  <app-button
+    label="Back to tasks"
+    variant="secondary"
+    [outlined]="true"
+    (click)="router.navigate(['/tasks'])"
+  />
+  @if (auth.isLoggedIn()) {
+    <app-button label="Edit" (click)="router.navigate(['/tasks', task().id, 'edit'])" />
+  }
+</div>
+
+<article class="panel">
+  <header>
+    <h1>{{ task().title }}</h1>
+    <span class="status" [ngClass]="{ done: task().completed }">
+      {{ task().completed | taskStatus }}
+    </span>
+  </header>
+
+  @if (task().user; as user) {
+    <dl>
+      <dt>Assigned to</dt>
+      <dd>{{ user.name }}</dd>
+      <dt>Username</dt>
+      <dd>{{ user.username }}</dd>
+      <dt>Email</dt>
+      <dd>{{ user.email }}</dd>
+      <dt>Company</dt>
+      <dd>{{ user.company.name }}</dd>
+    </dl>
+  } @else {
+    <p class="empty">No user info.</p>
+  }
+</article>

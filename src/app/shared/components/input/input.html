@@ -1,0 +1,18 @@
+@if (label()) {
+  <label [for]="id">
+    {{ label() }}
+    @if (required()) {
+      <span class="required-mark">*</span>
+    }
+  </label>
+}
+<input
+  pInputText
+  fluid
+  [id]="id"
+  [type]="type()"
+  [placeholder]="placeholder()"
+  [formControl]="control()"
+  [invalid]="showRequired()"
+  [attr.aria-required]="required()"
+/>

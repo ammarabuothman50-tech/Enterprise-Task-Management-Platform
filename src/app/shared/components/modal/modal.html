@@ -1,0 +1,9 @@
+<div class="backdrop" (click)="close.emit()"></div>
+
+<div class="dialog" role="dialog" aria-modal="true">
+  <h2><ng-content select="[modal-header]" /></h2>
+  <ng-content select="[modal-body]" />
+  <div class="footer">
+    <ng-content select="[modal-footer]" />
+  </div>
+</div>

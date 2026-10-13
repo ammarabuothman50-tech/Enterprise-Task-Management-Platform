@@ -1,0 +1,40 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  input {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress {
+  flex: 1;
+  height: 6px;
+  background: #ddd;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #15803d;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message {
+  color: #666;
+  text-align: center;
+}
